@@ -1,0 +1,31 @@
+<div class = "demo-card-wide mdl-card mdl-shadow--2dp">
+    <div class = "mdl-card__title">
+        <h2 class="mdl-card__title-text">Chord Editor</h2>
+    </div>
+    <div class = "mdl-card__supporting-text">
+        <textarea class = "mdl-textfield__input" type = "text" rows = "10" [(ngModel)] = "textbox"></textarea>
+    </div>
+    <div class="mdl-card__actions mdl-card--border mdl-grid">
+  
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-cell mdl-cell--3-col" (click) = createChord()>
+            Save
+        </button>
+        
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-cell mdl-cell--3-col" (click) = clearText()>
+            Clear Text Area
+        </button>
+        <label *ngIf = '!this.editorService.getEditorMode()' class= "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-cell mdl-cell--3-col">
+          Upload <input type="file" style="display: none;" #upload accept = "text/plain" (click) = "upload.value = null" (change) = "onUpload(upload.files)">
+        </label>
+        <label class="mdl-button mdl-button--raised mdl-js-button mdl-js-ripple-effect mdl-cell mdl-cell--3-col" for= 'privacy'>
+                {{this.isPrivate ? 'Make Public' : 'Make Private'}}
+              <input type="checkbox" id='privacy' style = 'display:none;' [(ngModel)] = 'isPrivate'>
+        </label> 
+        <button *ngIf = 'this.editorService.getEditorMode()' class = "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-cell mdl-cell--3-col"
+        (click) = "backToListing()">Back to Chord Listing
+        </button>
+    </div>
+</div>
+
+<div id = "snackBar">{{snackBarMsg}}</div>
+

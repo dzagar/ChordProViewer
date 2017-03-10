@@ -1,0 +1,39 @@
+<!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title"><a class = 'titleLink' routerLink = "/home">Don't Fret</a></span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+      <nav class="mdl-navigation mdl-layout--large-screen-only">
+        <p *ngIf = 'checkIfPrivate()' class = "mdl-navigation__link text">Logged in as {{ this.userService.getCurrentUser() }}</p>
+        <p *ngIf = '!checkIfPrivate()' class = "mdl-navigation__link text">You are not logged in.</p>
+        <a *ngIf = "checkIfPrivate()" class = "mdl-navigation__link" routerLink="/chord-editor">Chord Editor</a>
+        <a class = "mdl-navigation__link" routerLink="/songdisplay">Song Display</a>
+        <a *ngIf = "!checkIfPrivate()" class = "mdl-navigation__link" routerLink="/login">Login</a>
+        <a *ngIf = "!checkIfPrivate()" class = "mdl-navigation__link" routerLink="/register">Register</a>
+        <a *ngIf = "checkIfPrivate()" class = "mdl-navigation__link" (click) = 'this.userService.logOut()' routerLink="/home">Logout</a>
+      </nav>
+    </div>
+  </header>
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title"><a class = 'titleLink' routerLink = "/home">Don't Fret</a></span>
+    <nav class="mdl-navigation">
+        <p *ngIf = 'checkIfPrivate()' class = "mdl-navigation__link text">Logged in as {{ this.userService.getCurrentUser() }}</p>
+        <p *ngIf = '!checkIfPrivate()' class = "mdl-navigation__link text">You are not logged in.</p>
+        <a *ngIf = "!checkIfPrivate()" class = "mdl-navigation__link" routerLink="/login">Login</a>
+        <a *ngIf = "!checkIfPrivate()" class = "mdl-navigation__link" routerLink="/register">Register</a>
+        <a *ngIf = "checkIfPrivate()" class = "mdl-navigation__link" (click) = 'this.userService.logOut()' routerLink="/home">Logout</a>
+        <a *ngIf = "checkIfPrivate()" class = "mdl-navigation__link" routerLink="/chord-editor">Chord Editor</a>
+        <a class = "mdl-navigation__link" routerLink="/songdisplay">Song Display</a>
+        <a class = "mdl-navigation__link" routerLink="/privacy-policy">Privacy Policy</a>
+        <a class = "mdl-navigation__link" routerLink="/dmca">Copyright</a>
+    </nav>
+  </div>
+  <main class="mdl-layout__content">
+    <div class="page-content"><br><router-outlet></router-outlet></div>
+  </main>
+</div>
+

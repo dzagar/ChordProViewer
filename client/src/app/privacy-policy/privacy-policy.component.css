@@ -1,0 +1,11 @@
+.demo-card-wide.mdl-card {
+  width: 80%;
+  margin: auto;
+}
+.demo-card-wide > .mdl-card__title {
+  color: rgba(0,0,0,.87);
+  background-color: #ffc107;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}

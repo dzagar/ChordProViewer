@@ -1,0 +1,21 @@
+<div appMDLupdate class="mdl-card mdl-shadow--2dp">
+	<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+		<h2 class="mdl-card__title-text">Create Account</h2>
+	</div>
+  	<div class="mdl-card__supporting-text">
+
+		<div class="mdl-textfield mdl-js-textfield">
+			<label class="mdl-textfield__label" for="username">Username</label>
+			<input class="mdl-textfield__input" type="text" id="username" [(ngModel)] = 'username'/>
+		</div>
+		<div class="mdl-textfield mdl-js-textfield">
+			<label class="mdl-textfield__label" for="password">Password</label>
+			<input class="mdl-textfield__input" type="password" id="password" [(ngModel)] = 'password'/>
+		</div>
+		<div class="mdl-card__actions">
+	        <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" name="CreateUser" (click) = "createUser()">Create account and log in</button>
+        </div>
+        <div class = 'mdl-typography--title alert-danger'><p>{{formError}}</p></div>
+
+    </div>
+</div>

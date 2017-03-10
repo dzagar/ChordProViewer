@@ -1,0 +1,19 @@
+<div class = "mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    <div class="mdl-cell mdl-cell--6-col mdl-card">
+        <h1>Don't Fret.</h1>
+        <h3>A simple ChordPro file viewer, editor, and manager.</h3>
+        <div class = "mdl-card__actions">
+            <button *ngIf = '!checkIfPrivate()' class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" name="Login" (click) = "this.router.navigateByUrl('/login')">
+                Login
+            </button>
+            <button *ngIf = '!checkIfPrivate()' class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" name="Register" (click) = "this.router.navigateByUrl('/register')">
+                Register
+            </button>
+            <button *ngIf = 'checkIfPrivate()' class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" name="Logout" (click) = "this.userService.logOut()">
+                Logout
+            </button>
+        </div>
+    </div>
+    <div class="mdl-layout-spacer"></div>
+</div>

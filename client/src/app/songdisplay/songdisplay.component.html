@@ -1,0 +1,51 @@
+<script src = "../chordproConvert/chordproConvert.js"></script><!--Convert ChordPro using chordprojs-->
+
+<div class = "mdl-grid">
+    <div class="mdl-layout-spacer"></div>
+    
+    <div class="mdl-cell mdl-cell--6-col mdl-card">
+        <h2> {{ welcomeMsg }} </h2>
+        <h3>Browse through plenty of high-quality (and low-quality) songs, here.</h3>
+    </div>
+    
+    <div class="mdl-layout-spacer"></div>
+    
+    <div *ngFor = 'let chord of chordList' class = 'container' onmousedown='return false;' onselectstart='return false;'>
+        <div class = 'mdl-grid row' [ngClass] = '{ public: !chord.isPrivate, private: chord.isPrivate }'>
+            <div class = 'mdl-cell mdl-cell--3-col'>Title: {{ chord.title }}</div>
+            <div class = 'mdl-cell mdl-cell--3-col'>Created by {{ chord.user }}</div>
+            <div class = 'mdl-cell mdl-cell--3-col'>Version {{ chord.versionNo }}</div>
+            <div class = 'mdl-cell mdl-cell--3-col'>{{ chord.lastRevision }}</div>
+            
+            <div *ngIf = 'chord.user != this.userService.getCurrentUser()' class = 'mdl-cell mdl-cell--4-col'></div>
+            <button *ngIf = 'chord.user != this.userService.getCurrentUser()' class = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-cell mdl-cell--4-col" (click) = 'hideme[chord._id] = !hideme[chord._id]'>View</button>
+            <div *ngIf = 'chord.user == this.userService.getCurrentUser()' class = 'mdl-cell mdl-cell--1-col'></div>
+            <button *ngIf = 'chord.user == this.userService.getCurrentUser()' class = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-cell mdl-cell--2-col" (click) = 'hideme[chord._id] = !hideme[chord._id]'>View</button>
+            <div *ngIf = 'chord.user != this.userService.getCurrentUser()' class = 'mdl-cell mdl-cell--4-col'></div>
+            <button *ngIf = 'chord.user == this.userService.getCurrentUser()' class = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-cell mdl-cell--2-col"
+                (click) = 'editChord(chord._id)'>
+                Edit</button>
+            <button *ngIf = 'chord.user == this.userService.getCurrentUser()' class = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-cell mdl-cell--2-col"
+                (click) = 'renameChord(chord._id)'>
+                Rename</button>    
+            <button *ngIf = 'chord.user == this.userService.getCurrentUser()' class = "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-cell mdl-cell--2-col"
+                (click) = 'deleteChord(chord._id)'>
+                Delete</button>
+            <label *ngIf = 'chord.user == this.userService.getCurrentUser()' class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-cell mdl-cell--2-col">
+                {{chord.isPrivate ? 'Is Private' : 'Is Public'}}
+              <input type="checkbox" id='privacy-{{chord._id}}' style = 'display:none;' [(ngModel)] = 'chord.isPrivate' (change) = 'changePrivacy(chord._id)'>
+            </label> 
+            <div *ngIf = 'chord.user == this.userService.getCurrentUser()' class = 'mdl-cell mdl-cell--1-col'></div>
+            
+            <div [ngClass] = "{'privateFullscreen': this.isFullscreen&&chord.isPrivate, 'publicFullscreen': this.isFullscreen&&!chord.isPrivate }" [hidden] = '!hideme[chord._id]' id = 'view-{{chord._id}}' class = 'mdl-cell mdl-cell--12-col'>
+                <div class = 'chordText' [innerHTML] = 'this.editorService.convertChordPro(chord)'></div>
+                <div class = 'mdl-cell mdl-cell--5-col'></div>
+                <button (click) = 'goFullscreen(chord._id)' class = 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-cell mdl-cell--2-col'>
+                    <i class="material-icons">settings_overscan</i>
+                </button>
+                <div class = 'mdl-cell mdl-cell--5-col'></div>
+            </div> 
+            
+        </div>
+    </div>
+</div>

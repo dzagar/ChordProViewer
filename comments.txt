@@ -1,0 +1,32 @@
+Comments on SE3316 Project:
+
+TO RUN IN C9: 
+3 Terminal Windows
+1st window: navigate to server folder, run ./mongod
+2nd window: navigate to server folder, run node server.js
+3rd window: navigate to client folder, run ng build --watch
+
+Assumptions
+
+1a) Local authentication which uses a verified email and a password. 
+Password must be stored using a hashing algorithm that is resistant to brute force attacks 
+(e.g. bcrypt) [2].{2 points + 2 bonus points}
+    -- Assumption: Can use username instead (approved by Professor)
+
+2b) List of public chord sheets. {2 points}
+    -- Assumption: List of all public chord sheets. Sorted by most recent revision.
+
+2c) Click on a chord sheet to display the chord sheet together with metadata {4 points}
+    -- Assumption: Click 'View' button on chord sheet to display chord sheet with metadata.
+
+3d) Not make a copy of public chord sheets which the user does not own. {1 point}
+    -- Assumption: Database checks, sends back appropriate error message when attempted.
+    
+6a) Facility to upload a chordpro file (<1Mb). Same functionality as the “Save” button below. {2 bonus points}
+    -- Assumption: Contents of chordpro file are loaded into text area for inspection, then can be saved
+        accordingly using Save.
+
+7b) Save all revisions  of a chord sheet with an automatic version number and revised date. {2 points}
+    -- Assumption: A new chord sheet is created/saved that has the same title but increased version number
+        and different revision date.
+
